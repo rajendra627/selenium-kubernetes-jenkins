@@ -16,14 +16,16 @@ podTemplate(label: 'maven-selenium', containers: [
     containerEnvVar(key: 'SE_OPTS', value: '-port 5556'),
     containerEnvVar(key: 'HTTP_PROXY', value: 'http://64.102.255.40:80'),
     containerEnvVar(key: 'HTTPS_PROXY', value: 'https://64.102.255.40:80'),
+    containerEnvVar(key: 'http_proxy', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'https_proxy', value: 'https://64.102.255.40:80'),
   ]),
   containerTemplate(name: 'selenium-firefox', image: 'selenium/node-firefox:3.4.0', envVars: [
     containerEnvVar(key: 'HUB_PORT_4444_TCP_ADDR', value: 'localhost'),
     containerEnvVar(key: 'HUB_PORT_4444_TCP_PORT', value: '4444'),
     containerEnvVar(key: 'DISPLAY', value: ':98.0'),
     containerEnvVar(key: 'SE_OPTS', value: '-port 5557'),
-    containerEnvVar(key: 'HTTP_PROXY', value: 'http://64.102.255.40:80'),
-    containerEnvVar(key: 'HTTPS_PROXY', value: 'https://64.102.255.40:80'),
+    containerEnvVar(key: 'http_proxy', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'https_proxy', value: 'https://64.102.255.40:80'),
   ])
   ]) {
   
