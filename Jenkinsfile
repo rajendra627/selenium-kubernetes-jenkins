@@ -14,28 +14,26 @@ podTemplate(label: 'maven-selenium', containers: [
     containerEnvVar(key: 'HUB_PORT_4444_TCP_PORT', value: '4444'),
     containerEnvVar(key: 'DISPLAY', value: ':99.0'),
     containerEnvVar(key: 'SE_OPTS', value: '-port 5556'),
+    containerEnvVar(key: 'HTTP_PROXY', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'HTTPS_PROXY', value: 'https://64.102.255.40:80'),
   ]),
   containerTemplate(name: 'selenium-firefox', image: 'selenium/node-firefox:3.4.0', envVars: [
     containerEnvVar(key: 'HUB_PORT_4444_TCP_ADDR', value: 'localhost'),
     containerEnvVar(key: 'HUB_PORT_4444_TCP_PORT', value: '4444'),
     containerEnvVar(key: 'DISPLAY', value: ':98.0'),
     containerEnvVar(key: 'SE_OPTS', value: '-port 5557'),
+    containerEnvVar(key: 'HTTP_PROXY', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'HTTPS_PROXY', value: 'https://64.102.255.40:80'),
   ])
   ]) {
   
   node('maven-selenium') {
-    environment {
-      http_proxy = 'http://64.102.255.40:80'
-      https_proxy = 'https://64.102.255.40:80'
-    }
     stage('Checkout') {
       git 'https://github.com/carlossg/selenium-example.git'
       parallel (
         firefox: {
           container('maven-firefox') {
             stage('Test firefox') {
-              sh 'export http_proxy=http://64.102.255.40:80'
-              sh 'export https_proxy=https://64.102.255.40:80'
               sh 'env'
               sh 'mvn clean install -X'
               sh 'mvn -B clean test -Dselenium.browser=firefox -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
@@ -45,8 +43,6 @@ podTemplate(label: 'maven-selenium', containers: [
         chrome: {
           container('maven-chrome') {
             stage('Test chrome') {
-              sh 'export http_proxy=http://64.102.255.40:80'
-              sh 'export https_proxy=https://64.102.255.40:80'
               sh 'env'
               sh 'mvn clean install -X'              
               sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
