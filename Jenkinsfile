@@ -4,9 +4,24 @@
  */
 
 podTemplate(label: 'maven-selenium', containers: [
-  containerTemplate(name: 'maven-firefox', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
-  containerTemplate(name: 'maven-chrome', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
-  containerTemplate(name: 'selenium-hub', image: 'selenium/hub:3.4.0'),
+  containerTemplate(name: 'maven-firefox', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat', envVars: [
+    containerEnvVar(key: 'HTTP_PROXY', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'HTTPS_PROXY', value: 'https://64.102.255.40:80'),
+    containerEnvVar(key: 'http_proxy', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'https_proxy', value: 'https://64.102.255.40:80'),
+  ]),
+  containerTemplate(name: 'maven-chrome', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat', envVars: [
+    containerEnvVar(key: 'HTTP_PROXY', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'HTTPS_PROXY', value: 'https://64.102.255.40:80'),
+    containerEnvVar(key: 'http_proxy', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'https_proxy', value: 'https://64.102.255.40:80'),
+  ]),
+  containerTemplate(name: 'selenium-hub', image: 'selenium/hub:3.4.0', envVars: [
+    containerEnvVar(key: 'HTTP_PROXY', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'HTTPS_PROXY', value: 'https://64.102.255.40:80'),
+    containerEnvVar(key: 'http_proxy', value: 'http://64.102.255.40:80'),
+    containerEnvVar(key: 'https_proxy', value: 'https://64.102.255.40:80'),
+  ]),
   // because containers run in the same network space, we need to make sure there are no port conflicts
   // we also need to adapt the selenium images because they were designed to work with the --link option
   containerTemplate(name: 'selenium-chrome', image: 'selenium/node-chrome:3.4.0', envVars: [
