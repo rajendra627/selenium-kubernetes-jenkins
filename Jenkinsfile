@@ -32,6 +32,7 @@ podTemplate(label: 'maven-selenium', containers: [
             stage('Test firefox') {
               sh 'export http_proxy=http://64.102.255.40:80'
               sh 'export https_proxy=https://64.102.255.40:80'
+              sh 'sleep 3600'
               sh 'mvn clean install -X'
               sh 'mvn -B clean test -Dselenium.browser=firefox -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
             }
@@ -42,6 +43,7 @@ podTemplate(label: 'maven-selenium', containers: [
             stage('Test chrome') {
               sh 'export http_proxy=http://64.102.255.40:80'
               sh 'export https_proxy=https://64.102.255.40:80'
+              sh 'sleep 3600'
               sh 'mvn clean install -X'              
               sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
             }
