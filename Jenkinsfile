@@ -52,8 +52,9 @@ podTemplate(label: 'maven-selenium', containers: [
           container('maven-firefox') {
             stage('Test firefox') {
               sh 'env'
-              sh 'mvn clean install -X'
+              sh 'ip a'
               sh 'wget --user-agent="Mozilla/5.0" https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom'
+              sh 'mvn clean install -X'
               sh 'mvn -B clean test -Dselenium.browser=firefox -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
             }
           }
@@ -62,8 +63,9 @@ podTemplate(label: 'maven-selenium', containers: [
           container('maven-chrome') {
             stage('Test chrome') {
               sh 'env'
+              sh 'ip a'
+              sh 'wget --user-agent="Mozilla/5.0" https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom' 
               sh 'mvn clean install -X'
-              sh 'wget --user-agent="Mozilla/5.0" https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom'            
               sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
             }
           }
