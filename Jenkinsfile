@@ -53,7 +53,7 @@ podTemplate(label: 'maven-selenium', containers: [
             stage('Test firefox') {
               sh 'env'
               sh 'ip a'
-              sh 'sleep 1200'
+              sh 'apk update && apk add ca-certificates && update-ca-certificates && apk add openssl && apk add wget'
               sh 'mvn -B clean test -Dselenium.browser=firefox -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
               sh 'sleep 120'
             }
@@ -64,7 +64,7 @@ podTemplate(label: 'maven-selenium', containers: [
             stage('Test chrome') {
               sh 'env'
               sh 'ip a'
-              sh 'sleep 1200'
+              sh 'apk update && apk add ca-certificates && update-ca-certificates && apk add openssl && apk add wget'
               sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
               sh 'sleep 120'
             }
