@@ -55,7 +55,7 @@ podTemplate(label: 'maven-selenium', containers: [
               sh 'ip a'
               sh 'apk update && apk add ca-certificates && update-ca-certificates && apk add openssl && apk add wget'
               sh 'sleep 1200'
-              sh 'mvn -B clean test -Dselenium.browser=firefox -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
+              sh 'mvn -B clean test -Dselenium.browser=firefox -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0 -DproxySet=true -DproxyHost=https://64.102.255.40 -DproxyPort=80'
               sh 'sleep 120'
             }
           }
@@ -67,7 +67,7 @@ podTemplate(label: 'maven-selenium', containers: [
               sh 'ip a'
               sh 'apk update && apk add ca-certificates && update-ca-certificates && apk add openssl && apk add wget'
               sh 'sleep 1200'
-              sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0'
+              sh 'mvn -B clean test -Dselenium.browser=chrome -Dsurefire.rerunFailingTestsCount=5 -Dsleep=0 -DproxySet=true -DproxyHost=https://64.102.255.40 -DproxyPort=80'
               sh 'sleep 120'
             }
           }
